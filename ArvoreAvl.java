@@ -157,4 +157,16 @@ public class ArvoreAvl{
         base.setNodeEsquerda(rotacionarEsquerda(base.getNodeEsquerda()));
         return rotacionarEsquerda(base);
     }
+
+    public NodeAvl buscar(NodeAvl atual,int dado){
+
+        if(atual.getDado() == dado) return atual;
+
+        if(dado > atual.getDado()) return buscar(atual.getNodeDireita(), dado);
+
+        return buscar(atual.getNodeEsquerda(), dado);
+
+    }
+
+
 }

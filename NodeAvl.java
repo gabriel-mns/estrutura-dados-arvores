@@ -55,5 +55,39 @@ public class NodeAvl{
 
     }
 
+    public static int calcularFatorBalanceamento(NodeAvl atual){
+
+        NodeAvl nodeDireito = atual.getNodeDireita();
+        NodeAvl nodeEsquerda = atual.getNodeEsquerda();
+
+        if( nodeDireito == null &&  nodeEsquerda == null){
+
+            return 0;
+
+        } else if(nodeDireito == null){
+
+            return calcularFatorBalanceamento(atual.getNodeEsquerda()) +1;
+
+        } else if(nodeEsquerda == null){
+
+            return calcularFatorBalanceamento(atual.getNodeDireita()) -1;
+
+        }
+
+        return calcularFatorBalanceamento(atual.getNodeEsquerda()) + calcularFatorBalanceamento(atual.getNodeDireita());
+
+        
+        /*
+        * 
+        * PARA O LÓGICA DE VER O BALANCEAMENTO
+        * 
+        * SE O DA DIREITA FOR NULL RETORNA FB DA ESQUERDA +1
+        * 
+        * SE O DA ESQUERDA FOR NULL RETORNA FB DA DIREITA -1
+        * 
+        * SE TIVER OS DOIS FILHOS RETORNA FB DIREITA + FB ESQUERDA
+        * 
+        */
+    }
 
 }

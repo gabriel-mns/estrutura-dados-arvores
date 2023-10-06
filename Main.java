@@ -14,8 +14,12 @@ public class Main {
         ab.insert(389);
         ab.insert(200);
         ab.insert(278);
+        ab.insert(201);
 
         System.out.println(ab);
+        
+        NodeAvl nodeBuscado = ab.buscar(ab.getRoot(), 123);
+        System.out.println(NodeAvl.calcularFatorBalanceamento(nodeBuscado));
 
         // ab.remover(ab.getRoot(), 245);
 
