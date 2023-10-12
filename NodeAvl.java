@@ -9,10 +9,6 @@ public class NodeAvl{
         this.dado = dado;
     }
 
-    public int getAltura() {
-        return altura;
-    }
-
     public void setAltura(int altura) {
         this.altura = altura;
     } 
@@ -41,53 +37,35 @@ public class NodeAvl{
         this.dado = dado;
     }
 
-    public int getFatorBalanceamento(){
+    public int calcularAltura(){
 
-        return getAlturaNo(this.nodeEsquerda) - getAlturaNo(this.nodeDireita);
+        int alturaDir = -1;
+        int alturaEsq = -1;
+
+        if(nodeDireita != null)  alturaDir = nodeDireita.calcularAltura();
+        if(nodeEsquerda != null) alturaEsq = nodeEsquerda.calcularAltura();
+
+        altura = getMaior(alturaDir, alturaEsq) + 1;
+
+        return altura;
 
     }
 
-    public static int getAlturaNo(NodeAvl node){
+    public int calcularFatorBalanceamento(){
 
-        if(node == null) return -1;
+        int alturaDir = -1;
+        int alturaEsq = -1;
 
-        return node.altura;
+        if(nodeDireita  != null) alturaDir = nodeDireita.calcularAltura();
+        if(nodeEsquerda != null) alturaEsq = nodeEsquerda.calcularAltura();
+
+        return alturaEsq - alturaDir;
 
     }
 
-    public static int calcularFatorBalanceamento(NodeAvl atual){
+    private int getMaior(int a, int b){
 
-        NodeAvl nodeDireito = atual.getNodeDireita();
-        NodeAvl nodeEsquerda = atual.getNodeEsquerda();
+        return a > b ? a : b;
 
-        if( nodeDireito == null &&  nodeEsquerda == null){
-
-            return 0;
-
-        } else if(nodeDireito == null){
-
-            return calcularFatorBalanceamento(atual.getNodeEsquerda()) +1;
-
-        } else if(nodeEsquerda == null){
-
-            return calcularFatorBalanceamento(atual.getNodeDireita()) -1;
-
-        }
-
-        return calcularFatorBalanceamento(atual.getNodeEsquerda()) + calcularFatorBalanceamento(atual.getNodeDireita());
-
-        
-        /*
-        * 
-        * PARA O LÓGICA DE VER O BALANCEAMENTO
-        * 
-        * SE O DA DIREITA FOR NULL RETORNA FB DA ESQUERDA +1
-        * 
-        * SE O DA ESQUERDA FOR NULL RETORNA FB DA DIREITA -1
-        * 
-        * SE TIVER OS DOIS FILHOS RETORNA FB DIREITA + FB ESQUERDA
-        * 
-        */
     }
-
 }
