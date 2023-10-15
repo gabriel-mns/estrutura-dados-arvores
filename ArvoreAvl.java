@@ -11,44 +11,36 @@ public class ArvoreAvl{
 
     public void insert(int dado){
 
-        insertRecursivo(dado, root);
-        atualizarAlturas();
-        root = rebalancear(root);
+        //insertRecursivo(dado, root);
+        root = insertRec(dado, root);
 
     }
 
-    public void insertRecursivo(int dado, NodeAvl nodeAtual){
+    public NodeAvl insertRec(int dado, NodeAvl nodeAtual){
 
-        if(root == null){
+        if(nodeAtual == null) { 
 
-            root = new NodeAvl(dado);
-            return;
+            return new NodeAvl(dado);
 
         }
 
         NodeAvl nodeDireita = nodeAtual.getNodeDireita();
         NodeAvl nodeEsquerda = nodeAtual.getNodeEsquerda();
 
-         // Se ele vai para direita
+        // Se ele vai para direita
         if(dado >= nodeAtual.getDado()){
                     
-            if(nodeDireita == null){
-                nodeAtual.setNodeDireita(new NodeAvl(dado));
-                return;
-            }
+            nodeAtual.setNodeDireita(insertRec(dado, nodeDireita));
 
-            insertRecursivo(dado, nodeDireita);
-            return;
+        } else {
+
+            nodeAtual.setNodeEsquerda(insertRec(dado, nodeEsquerda));
+
         }
 
-        // Se ele vai para esquerda
-        if(nodeEsquerda == null){
-            nodeAtual.setNodeEsquerda(new NodeAvl(dado));
-            return;
-        }
-
-        insertRecursivo(dado, nodeEsquerda);
-
+        atualizarAlturas();
+        nodeAtual = rebalancear(nodeAtual);
+        return nodeAtual;
 
     }
 
@@ -115,6 +107,7 @@ public class ArvoreAvl{
             if(dado >= atual.getDado()){
 
                 atual.setNodeDireita(remover(atual.getNodeDireita(), dado));
+                
                 
             } else {
                 
@@ -219,7 +212,7 @@ public class ArvoreAvl{
     }
 
     public String toString() {
-        return toStringRecursivo(root, "", true);
+        return toStringRecursivo(root, "", false);
     }
 
     public String toStringRecursivo(NodeAvl node, String prefix, boolean isLeft) {
