@@ -179,7 +179,7 @@ public class ArvoreAvl{
 
             if(nodeEsq.getNodeEsquerda() == null){
 
-                return rotacionarEsquerdaDireita(atual);
+                 return rotacionarEsquerdaDireita(atual);
 
             }
 
@@ -199,6 +199,16 @@ public class ArvoreAvl{
 
     }
     
+    private Node buscar(Node atual,int dado){
+
+        if(atual.getDado() == dado) return atual;
+
+        if(dado > atual.getDado()) return buscar(atual.getNodeDireita(), dado);
+
+        return buscar(atual.getNodeEsquerda(), dado);
+
+    }
+
     //GETTERS E SETTERS
     public NodeAvl getRoot() {
         return root;
@@ -217,7 +227,7 @@ public class ArvoreAvl{
 
         if (node != null) {
             sb.append(prefix);
-            sb.append(isLeft ? "├── " : "└── ");
+            sb.append(isLeft ? "d >  " : "e > ");
             sb.append(node.getDado());
             sb.append("\n");
 
@@ -233,7 +243,7 @@ public class ArvoreAvl{
 
     public NodeAvl rotacionarEsquerda(NodeAvl base){
 
-        System.out.println("Realizado: Rtc. Esquerda");
+        //System.out.println("Realizado: Rtc. Esquerda");
 
         // Filho base  = nó a direita do nó desbalanceado
         // Neto base = 
@@ -249,7 +259,7 @@ public class ArvoreAvl{
 
     public NodeAvl rotacionarDireita(NodeAvl base){
 
-        System.out.println("Realizado: Rtc. Direita");
+        //System.out.println("Realizado: Rtc. Direita");
 
         // Filho base  = nó a esquerda do nó desbalanceado
         // Neto base   = filho do filho da base
