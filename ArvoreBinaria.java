@@ -124,59 +124,9 @@ public class ArvoreBinaria {
 
     }
 
-    private void anotacaoes(int dado){
+    public Node buscar(Node atual,int dado){
 
-        Node pai = findNodePai(dado);
-        boolean folhaRemoverEstaAesquerda = dado > pai.getDado();
-        Node nodeRemover = folhaRemoverEstaAesquerda ? pai.getNodeEsquerda() : pai.getNodeEsquerda();
-
-        if(nodeRemover.getNodeDireita() == null && nodeRemover.getNodeEsquerda() == null){
-
-            if(folhaRemoverEstaAesquerda){
-
-                pai.setNodeEsquerda(null);
-
-            } else {
-                
-                pai.setNodeDireita(null);
-
-            }
-
-
-        }
-
-        // Se ele não tiver nada a direita
-        if(nodeRemover.getNodeDireita() == null){
-
-            if(folhaRemoverEstaAesquerda){
-
-                pai.setNodeEsquerda(nodeRemover.getNodeEsquerda());
-
-            }
-
-            pai.setNodeDireita(nodeRemover.getNodeEsquerda());
-
-        }
-
-        // Se ele não tiver nada a esquerda
-        if(nodeRemover.getNodeEsquerda() == null){
-
-            if(folhaRemoverEstaAesquerda){
-
-                pai.setNodeEsquerda(nodeRemover.getNodeDireita());
-
-            }
-
-            pai.setNodeDireita(nodeRemover.getNodeDireita());
-
-        }
-
-        
-
-
-    }
-
-    private Node buscar(Node atual,int dado){
+        if(atual == null) return new Node();
 
         if(atual.getDado() == dado) return atual;
 

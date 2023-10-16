@@ -46,6 +46,8 @@ public class ArvoreAvl{
 
     public NodeAvl remover(NodeAvl atual, int dado){
 
+        if(atual == null) return new NodeAvl();
+
         if(atual.getDado() == dado){
 
             boolean noFolha = atual.getNodeDireita() == null && atual.getNodeEsquerda() == null;
@@ -58,8 +60,8 @@ public class ArvoreAvl{
                 // Só vai falar que o novo valor dele é vazio (na chamada recursiva:
                 // atual.setEsquerda(null)
                 // )
-                root = rebalancear(root);
                 atualizarAlturas();
+                root = rebalancear(root);
 
                 return null;
 
@@ -72,8 +74,8 @@ public class ArvoreAvl{
                     atual.setDado(menorNoDoLadoDireito.getDado());
                     menorNoDoLadoDireito.setDado(dado);
                     atual.setNodeDireita(remover(atual.getNodeDireita(), dado));
-                    root = rebalancear(root);
-                    atualizarAlturas();
+                    // root = rebalancear(root);
+                    // atualizarAlturas();
                     return atual;
 
                 }
@@ -192,7 +194,9 @@ public class ArvoreAvl{
 
     }
     
-    private Node buscar(Node atual,int dado){
+    public NodeAvl buscar(NodeAvl atual,int dado){
+
+        if(atual == null) return new NodeAvl();
 
         if(atual.getDado() == dado) return atual;
 
@@ -277,16 +281,6 @@ public class ArvoreAvl{
 
         base.setNodeEsquerda(rotacionarEsquerda(base.getNodeEsquerda()));
         return rotacionarDireita(base);
-    }
-
-    public NodeAvl buscar(NodeAvl atual,int dado){
-
-        if(atual.getDado() == dado) return atual;
-
-        if(dado > atual.getDado()) return buscar(atual.getNodeDireita(), dado);
-
-        return buscar(atual.getNodeEsquerda(), dado);
-
     }
 
     public void atualizarAlturas(){
