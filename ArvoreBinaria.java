@@ -252,11 +252,4 @@ public class ArvoreBinaria {
         return tamanhoDaSubarvoreDireita + 1;
     }
 
-    // AUXILIARES
-    private boolean precisaDeBalanceamento(int fatorBalanceamento){
-
-        return fatorBalanceamento > 1 || fatorBalanceamento < -1;
-
-    }
-
 }
