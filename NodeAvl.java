@@ -9,6 +9,9 @@ public class NodeAvl{
         this.dado = dado;
     }
 
+    public NodeAvl() {
+    }
+
     public void setAltura(int altura) {
         this.altura = altura;
     } 
